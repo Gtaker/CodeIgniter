@@ -60,8 +60,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /*
  * ------------------------------------------------------
  *  Load the framework constants
+ *  载入框架常量
  * ------------------------------------------------------
  */
+    //注：如果config目录中存在与当前开发环境同名的目录，
+    //那么载入该目录下的 constants.php文件
 	if (file_exists(APPPATH.'config/'.ENVIRONMENT.'/constants.php'))
 	{
 		require_once(APPPATH.'config/'.ENVIRONMENT.'/constants.php');
@@ -75,6 +78,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /*
  * ------------------------------------------------------
  *  Load the global functions
+ *  载入全局函数
  * ------------------------------------------------------
  */
 	require_once(BASEPATH.'core/Common.php');
