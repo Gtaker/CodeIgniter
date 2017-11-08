@@ -2,7 +2,9 @@
 /**
  * CodeIgniter
  *
- * An open source application development framework for PHP
+ * 一款开源的PHP应用开发框架
+ *
+ * （注：以下为 MIT协议声明 原文）
  *
  * This content is released under the MIT License (MIT)
  *
@@ -50,6 +52,7 @@ class CI_Exceptions {
 
 	/**
 	 * Nesting level of the output buffering mechanism
+     * 输出缓存机制的嵌套等级
 	 *
 	 * @var	int
 	 */
@@ -57,6 +60,7 @@ class CI_Exceptions {
 
 	/**
 	 * List of available error levels
+     * 可用的错误等级列表
 	 *
 	 * @var	array
 	 */
@@ -77,6 +81,7 @@ class CI_Exceptions {
 
 	/**
 	 * Class constructor
+     * 构造函数
 	 *
 	 * @return	void
 	 */
@@ -84,19 +89,22 @@ class CI_Exceptions {
 	{
 		$this->ob_level = ob_get_level();
 		// Note: Do not log messages from this constructor.
+        // 提示：不要在这个构造函数中记录信息
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
 	 * Exception Logger
+     * 异常记录器
 	 *
 	 * Logs PHP generated error messages
+     * 记录 PHP 生成的错误信息
 	 *
-	 * @param	int	$severity	Log level
-	 * @param	string	$message	Error message
-	 * @param	string	$filepath	File path
-	 * @param	int	$line		Line number
+	 * @param	int	$severity	Log level   日记等级
+	 * @param	string	$message	Error message   错误信息
+	 * @param	string	$filepath	File path   文件路径
+	 * @param	int	$line		Line number     行数
 	 * @return	void
 	 */
 	public function log_exception($severity, $message, $filepath, $line)
@@ -109,11 +117,12 @@ class CI_Exceptions {
 
 	/**
 	 * 404 Error Handler
+     * 404 错误处理
 	 *
 	 * @uses	CI_Exceptions::show_error()
 	 *
-	 * @param	string	$page		Page URI
-	 * @param 	bool	$log_error	Whether to log the error
+	 * @param	string	$page		Page URI    页面 URI
+	 * @param 	bool	$log_error	Whether to log the error    是否记录错误
 	 * @return	void
 	 */
 	public function show_404($page = '', $log_error = TRUE)
@@ -130,27 +139,30 @@ class CI_Exceptions {
 		}
 
 		// By default we log this, but allow a dev to skip it
+        // 默认的我们会将异常记录下来，但是也允许通过传入的参数来跳过这一步
 		if ($log_error)
 		{
 			log_message('error', $heading.': '.$page);
 		}
 
 		echo $this->show_error($heading, $message, 'error_404', 404);
-		exit(4); // EXIT_UNKNOWN_FILE
+		exit(4); // EXIT_UNKNOWN_FILE（文件未找到）
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
 	 * General Error Page
+     * 普通错误页面
 	 *
 	 * Takes an error message as input (either as a string or an array)
 	 * and displays it using the specified template.
+     * 根据指定的模版显示传入的错误信息（字符串或数组）。
 	 *
-	 * @param	string		$heading	Page heading
-	 * @param	string|string[]	$message	Error message
-	 * @param	string		$template	Template name
-	 * @param 	int		$status_code	(default: 500)
+	 * @param	string		$heading	Page heading    错误标题
+	 * @param	string|string[]	$message	Error message   错误信息
+	 * @param	string		$template	Template name   模版名
+	 * @param 	int		$status_code	(default: 500)  （默认：500）
 	 *
 	 * @return	string	Error page output
 	 */
@@ -226,11 +238,12 @@ class CI_Exceptions {
 
 	/**
 	 * Native PHP error handler
+     * 原生 PHP 错误处理
 	 *
-	 * @param	int	$severity	Error level
-	 * @param	string	$message	Error message
-	 * @param	string	$filepath	File path
-	 * @param	int	$line		Line number
+	 * @param	int	$severity	Error level     错误等级
+	 * @param	string	$message	Error message   错误信息
+	 * @param	string	$filepath	File path   文件路径
+	 * @param	int	$line		Line number     行数
 	 * @return	void
 	 */
 	public function show_php_error($severity, $message, $filepath, $line)
@@ -244,6 +257,7 @@ class CI_Exceptions {
 		$severity = isset($this->levels[$severity]) ? $this->levels[$severity] : $severity;
 
 		// For safety reasons we don't show the full file path in non-CLI requests
+        // 出于对安全性的考虑，我们不会在非CLI请求下显示完整的文件路径
 		if ( ! is_cli())
 		{
 			$filepath = str_replace('\\', '/', $filepath);
