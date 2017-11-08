@@ -71,7 +71,7 @@ defined('FOPEN_READ_WRITE_CREATE_STRICT')       OR define('FOPEN_READ_WRITE_CREA
 defined('EXIT_SUCCESS')        OR define('EXIT_SUCCESS', 0); // 没有错误
 defined('EXIT_ERROR')          OR define('EXIT_ERROR', 1); // 一般错误
 defined('EXIT_CONFIG')         OR define('EXIT_CONFIG', 3); // 配置错误
-defined('EXIT_UNKNOWN_FILE')   OR define('EXIT_UNKNOWN_FILE', 4); // 文件没有找到
+defined('EXIT_UNKNOWN_FILE')   OR define('EXIT_UNKNOWN_FILE', 4); // 文件未找到
 defined('EXIT_UNKNOWN_CLASS')  OR define('EXIT_UNKNOWN_CLASS', 5); // 类不存在
 defined('EXIT_UNKNOWN_METHOD') OR define('EXIT_UNKNOWN_METHOD', 6); // 类中的方法不存在
 defined('EXIT_USER_INPUT')     OR define('EXIT_USER_INPUT', 7); // 无效的用户输入
