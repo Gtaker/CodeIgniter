@@ -78,7 +78,7 @@ class CI_Exceptions {
 	);
 
 	/**
-     * 构造函数
+     * 类构造函数
 	 *
 	 * @return	void
 	 */
