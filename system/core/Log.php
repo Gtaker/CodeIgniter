@@ -2,7 +2,9 @@
 /**
  * CodeIgniter
  *
- * An open source application development framework for PHP
+ * 一款开源的PHP应用开发框架
+ *
+ * （注：以下为 MIT协议声明 原文）
  *
  * This content is released under the MIT License (MIT)
  *
@@ -39,6 +41,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
  * Logging Class
+ * 日志类
  *
  * @package		CodeIgniter
  * @subpackage	Libraries
@@ -50,6 +53,7 @@ class CI_Log {
 
 	/**
 	 * Path to save log files
+     * 日志文件的保存路径
 	 *
 	 * @var string
 	 */
@@ -57,6 +61,7 @@ class CI_Log {
 
 	/**
 	 * File permissions
+     * 文件权限
 	 *
 	 * @var	int
 	 */
@@ -64,6 +69,7 @@ class CI_Log {
 
 	/**
 	 * Level of logging
+     * 日志记录等级
 	 *
 	 * @var int
 	 */
@@ -71,6 +77,7 @@ class CI_Log {
 
 	/**
 	 * Array of threshold levels to log
+     * 日志的阈值数组
 	 *
 	 * @var array
 	 */
@@ -78,6 +85,7 @@ class CI_Log {
 
 	/**
 	 * Format of timestamp for log files
+     * 日志文件的时间戳格式
 	 *
 	 * @var string
 	 */
@@ -85,6 +93,7 @@ class CI_Log {
 
 	/**
 	 * Filename extension
+     * 文件扩展名
 	 *
 	 * @var	string
 	 */
@@ -92,6 +101,7 @@ class CI_Log {
 
 	/**
 	 * Whether or not the logger can write to the log files
+     * 日志记录器是否可以写入日志文件
 	 *
 	 * @var bool
 	 */
@@ -99,6 +109,7 @@ class CI_Log {
 
 	/**
 	 * Predefined logging levels
+     * 预定义日志记录等级
 	 *
 	 * @var array
 	 */
@@ -106,7 +117,8 @@ class CI_Log {
 
 	/**
 	 * mbstring.func_overload flag
-	 *
+     * mbstring.func_overload（注：php.ini 中的配置项） 标记
+     *
 	 * @var	bool
 	 */
 	protected static $func_overload;
@@ -115,6 +127,7 @@ class CI_Log {
 
 	/**
 	 * Class constructor
+     * 类构造函数
 	 *
 	 * @return	void
 	 */
