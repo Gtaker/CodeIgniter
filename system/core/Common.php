@@ -593,8 +593,8 @@ if ( ! function_exists('_error_handler'))
 
         // 当一个错误发生时，设置状态头为"500 Internal Server Error"（500 内部服务器错误）
         // 以表明客户端的某个地方出现了错误。
-        // 这不能在 $_error->show_php_error 方法中完成，
-        // 因为该方法只能在设置了 display_errors 标记(通常不是在生产环境中)
+        // 这不能完全依靠 $_error->show_php_error 方法中完成，
+        // 因为该方法只能在设置了 display_errors 标记(生产环境通常不会设置)
         // 或出现的错误等级低于 error_reporting 中设置的等级而被忽略时调用。
 		if ($is_error)
 		{
