@@ -505,8 +505,8 @@ if ( ! function_exists('log_message'))
 	 *
      * 我们以此作为一种简单机制来访问日志类并将日志信息保存下来。
      *
-	 * @param	string	the error level: 'error', 'debug' or 'info'     错误等级：'error','debug' 或 'info'
-	 * @param	string	the error message       错误信息
+	 * @param	string	$level      the error level: 'error', 'debug' or 'info'     错误等级：'error','debug' 或 'info'
+	 * @param	string	$message    the error message       错误信息
 	 * @return	void
 	 */
 	function log_message($level, $message)
@@ -641,7 +641,7 @@ if ( ! function_exists('_error_handler'))
 	 * based on the current error_reporting level.
 	 * We do that with the use of a PHP error template.
      *
-     * 这是在相对 CodeIgniter.php 顶部声明的自定义错误处理程序。
+     * 这是在 CodeIgniter.php 头部注册的自定义错误处理程序（注：通过php的 set_error_handler() 函数）。
      * 我们使用这个函数的主要原因是，可以在用户没有访问服务器日志的情况下，
      * 将 PHP 错误记录到我们自己的日志文件中。因为该函数会有效的拦截 PHP 错误，
      * 所以我们也需要根据当前的错误提示等级显示错误。
@@ -697,7 +697,7 @@ if ( ! function_exists('_error_handler'))
         // 通过PHP默认错误处理的方式终止脚本，请参照：http://www.php.net/manual/en/errorfunc.constants.php
 		if ($is_error)
 		{
-			exit(1); // EXIT_ERROR  一般错误
+			exit(1); // EXIT_ERROR（一般错误）
 		}
 	}
 }
@@ -708,10 +708,14 @@ if ( ! function_exists('_exception_handler'))
 {
 	/**
 	 * Exception Handler
+     * 异常处理
 	 *
 	 * Sends uncaught exceptions to the logger and displays them
 	 * only if display_errors is On so that they don't show up in
 	 * production environments.
+     * 发送一个捕获到的异常到日志记录器，
+     * 并在 display_errors 开启的情况下将其显示出来，
+     * 即在生产环境中不会显示异常。
 	 *
 	 * @param	Exception	$exception
 	 * @return	void
@@ -723,12 +727,13 @@ if ( ! function_exists('_exception_handler'))
 
 		is_cli() OR set_status_header(500);
 		// Should we display the error?
+        // 是否应该显示错误？
 		if (str_ireplace(array('off', 'none', 'no', 'false', 'null'), '', ini_get('display_errors')))
 		{
 			$_error->show_exception($exception);
 		}
 
-		exit(1); // EXIT_ERROR
+		exit(1); // EXIT_ERROR  一般错误
 	}
 }
 
@@ -738,13 +743,18 @@ if ( ! function_exists('_shutdown_handler'))
 {
 	/**
 	 * Shutdown Handler
+     * 终止处理
 	 *
 	 * This is the shutdown handler that is declared at the top
 	 * of CodeIgniter.php. The main reason we use this is to simulate
 	 * a complete custom exception handler.
-	 *
+	 * 这是一个在 CodeIgniter.php 顶部注册的错误处理函数。（注：通过php原生函数 register_shutdown_function() 注册）
+     * 我们可以使用这个函数模拟完整的自定义错误处理机制。
+     *
 	 * E_STRICT is purposively neglected because such events may have
 	 * been caught. Duplication or none? None is preferred for now.
+     * E_STRICT 类型的错误被有意忽略，因为这类错误可能已被捕获，
+     * 将错误回收还是忽略它？目前来说忽略它是更好的选择。
 	 *
 	 * @link	http://insomanic.me.uk/post/229851073/php-trick-catching-fatal-errors-e-error-with-a
 	 * @return	void
@@ -766,10 +776,12 @@ if ( ! function_exists('remove_invisible_characters'))
 {
 	/**
 	 * Remove Invisible Characters
+     * 移除不可见字符
 	 *
 	 * This prevents sandwiching null characters
 	 * between ascii characters, like Java\0script.
-	 *
+	 * 该函数可以防止在ascii字符中夹带空字符，如 Java\0script。
+     *
 	 * @param	string
 	 * @param	bool
 	 * @return	string
@@ -780,14 +792,16 @@ if ( ! function_exists('remove_invisible_characters'))
 
 		// every control character except newline (dec 10),
 		// carriage return (dec 13) and horizontal tab (dec 09)
+        // 移除除换行符(十进制ascii码为10)，回车符（十进制ascii码为13）
+        // 和水平制表符（十进制ascii码值为09）外的所有控制字符。
 		if ($url_encoded)
 		{
-			$non_displayables[] = '/%0[0-8bcef]/i';	// url encoded 00-08, 11, 12, 14, 15
-			$non_displayables[] = '/%1[0-9a-f]/i';	// url encoded 16-31
-			$non_displayables[] = '/%7f/i';	// url encoded 127
+			$non_displayables[] = '/%0[0-8bcef]/i';	// url encoded 00-08, 11, 12, 14, 15    编码的ascii值为00-08，11，12，14，15的url字符
+			$non_displayables[] = '/%1[0-9a-f]/i';	// url encoded 16-31                    编码的ascii值为16-31的url字符
+			$non_displayables[] = '/%7f/i';	// url encoded 127                              编码的ascii值为127的url字符
 		}
 
-		$non_displayables[] = '/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]+/S';	// 00-08, 11, 12, 14-31, 127
+		$non_displayables[] = '/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]+/S';	// 00-08, 11, 12, 14-31, 127    ascii值为00-08，11，12，14-31，127的字符
 
 		do
 		{
@@ -805,10 +819,11 @@ if ( ! function_exists('html_escape'))
 {
 	/**
 	 * Returns HTML escaped variable.
+     * 将变量中的特殊字符转换为HTML实体并将结果返回
 	 *
-	 * @param	mixed	$var		The input string or array of strings to be escaped.
-	 * @param	bool	$double_encode	$double_encode set to FALSE prevents escaping twice.
-	 * @return	mixed			The escaped string or array of strings as a result.
+	 * @param	mixed	$var		The input string or array of strings to be escaped.     输入的需要转义的字符串或字符串数组。
+	 * @param	bool	$double_encode	$double_encode set to FALSE prevents escaping twice.    将 $double_encode 设置为FALSE可以避免对现有的HTML实体转义。
+	 * @return	mixed			The escaped string or array of strings as a result.     将结果作为字符串或字符串数组返回。
 	 */
 	function html_escape($var, $double_encode = TRUE)
 	{
@@ -837,12 +852,14 @@ if ( ! function_exists('_stringify_attributes'))
 {
 	/**
 	 * Stringify attributes for use in HTML tags.
+     * 在HTML标记中使用字符串化的属性
 	 *
 	 * Helper function used to convert a string, array, or object
 	 * of attributes to a string.
+     * 该函数通常被用来将字符串，数组，或对象的属性转换为字符串
 	 *
-	 * @param	mixed	string, array, object
-	 * @param	bool
+	 * @param	mixed   $attributes string（字符串）, array（数组）, object（对象）
+	 * @param	bool    $js （注：如果$js的值为true，那么字符串化后的多个属性之间会加一个空格）
 	 * @return	string
 	 */
 	function _stringify_attributes($attributes, $js = FALSE)
@@ -876,10 +893,14 @@ if ( ! function_exists('function_usable'))
 {
 	/**
 	 * Function usable
+     * 函数可用性
 	 *
 	 * Executes a function_exists() check, and if the Suhosin PHP
 	 * extension is loaded - checks whether the function that is
 	 * checked might be disabled in there as well.
+     *
+     * 执行 function_exists() 进行检查时，如果加载了 Suhosin PHP 扩展，
+     * 将不会检查是否在 Suhosin （配置）里禁用了被检查的函数。
 	 *
 	 * This is useful as function_exists() will return FALSE for
 	 * functions disabled via the *disable_functions* php.ini
@@ -887,14 +908,24 @@ if ( ! function_exists('function_usable'))
 	 * *suhosin.executor.disable_eval*. These settings will just
 	 * terminate script execution if a disabled function is executed.
 	 *
+     * 对于通过 php.ini 的 *disable_functions* 设置禁用的函数，
+     * 这（function_exists()）将正确地返回FALSE，
+     * 但是却不能正确检测在 *suhosin.executor.func.blacklist*
+     * 和 *suhosin.executor.disable_eval* 设置中禁用的函数。
+     * 这些设置只会在调用被禁用的函数时，终止脚本的执行。
+     *
 	 * The above described behavior turned out to be a bug in Suhosin,
 	 * but even though a fix was committed for 0.9.34 on 2012-02-12,
 	 * that version is yet to be released. This function will therefore
 	 * be just temporary, but would probably be kept for a few years.
+     *
+     * 以上的描述为 Suhosin 扩展中的一个 bug，即使在 2012年02月12日
+     * 提交的 0.9.34 版本修复了这个bug，但这个版本至今仍没有发布。（注：...）
+     * 因此虽然这个函数只是临时的，但这个期限可能是数年。
 	 *
 	 * @link	http://www.hardened-php.net/suhosin/
-	 * @param	string	$function_name	Function to check for
-	 * @return	bool	TRUE if the function exists and is safe to call,
+	 * @param	string	$function_name	Function to check for   需要检查的函数名
+	 * @return	bool	TRUE if the function exists and is safe to call,    如果函数存在并且可以安全调用则返回TRUE，否则返回FALSE。
 	 *			FALSE otherwise.
 	 */
 	function function_usable($function_name)
