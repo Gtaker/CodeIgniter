@@ -41,6 +41,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
  * Exceptions Class
+ * 异常处理类
  *
  * @package		CodeIgniter
  * @subpackage	Libraries
