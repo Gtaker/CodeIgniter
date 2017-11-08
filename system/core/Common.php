@@ -182,7 +182,7 @@ if ( ! function_exists('load_class'))
         // 我们找到这个类了吗？
 		if ($name === FALSE)
 		{
-            // 注意：我们使用 exit() 而不是 show_error() 来避免异常类自我调用导致的死循环(?)
+            // 注意：我们使用 exit() 而不是 show_error() 来避免异常类自我调用导致的死循环
 			set_status_header(503);
 			echo 'Unable to locate the specified class: '.$class.'.php';
 			exit(5); // EXIT_UNKNOWN_CLASS（类不存在）
