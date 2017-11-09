@@ -69,7 +69,7 @@ class CI_Log {
 
 	/**
 	 * Level of logging
-     * 日志记录等级
+     * 日志记录等级（阈值）
 	 *
 	 * @var int
 	 */
@@ -77,7 +77,7 @@ class CI_Log {
 
 	/**
 	 * Array of threshold levels to log
-     * 日志的阈值数组
+     * 日志（记录等级）阈值数组
 	 *
 	 * @var array
 	 */
@@ -173,11 +173,13 @@ class CI_Log {
 
 	/**
 	 * Write Log File
+     * 写入日志文件
 	 *
 	 * Generally this function will be called using the global log_message() function
-	 *
-	 * @param	string	$level 	The error level: 'error', 'debug' or 'info'
-	 * @param	string	$msg 	The error message
+	 * 这个函数通常被公共函数 log_message() 调用
+     *
+	 * @param	string	$level 	The error level: 'error', 'debug' or 'info'     错误等级：'error', 'debug' or 'info'
+	 * @param	string	$msg 	The error message                               错误信息
 	 * @return	bool
 	 */
 	public function write_log($level, $msg)
