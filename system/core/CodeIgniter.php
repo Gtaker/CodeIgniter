@@ -2,7 +2,9 @@
 /**
  * CodeIgniter
  *
- * An open source application development framework for PHP
+ * 一款开源的PHP应用开发框架
+ *
+ * （注：以下为 MIT协议声明 原文）
  *
  * This content is released under the MIT License (MIT)
  *
@@ -39,8 +41,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
  * System Initialization File
+ * 系统初始化文件
  *
  * Loads the base classes and executes the request.
+ * 载入基础类并处理请求
  *
  * @package		CodeIgniter
  * @subpackage	CodeIgniter
@@ -51,6 +55,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
  * CodeIgniter Version
+ * CodeIgniter版本
  *
  * @var	string
  *
@@ -87,6 +92,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /*
  * ------------------------------------------------------
  * Security procedures
+ * 安全程序
  * ------------------------------------------------------
  */
 
@@ -137,6 +143,7 @@ if ( ! is_php('5.4'))
 /*
  * ------------------------------------------------------
  *  Define a custom error handler so we can log PHP errors
+ * 注册自定义的错误处理函数，这样我们就可以记录 PHP 错误了
  * ------------------------------------------------------
  */
 	set_error_handler('_error_handler');
