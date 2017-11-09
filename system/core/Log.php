@@ -204,6 +204,7 @@ class CI_Log {
 		{
 			$newfile = TRUE;
 			// Only add protection to php files
+            // 只对php文件添加保护
 			if ($this->_file_ext === 'php')
 			{
 				$message .= "<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>\n\n";
@@ -218,6 +219,8 @@ class CI_Log {
 		flock($fp, LOCK_EX);
 
 		// Instantiating DateTime with microseconds appended to initial date is needed for proper support of this format
+        // 实例化一个 DateTime 类以正确的支持带微秒格式的日期
+        //（注：当使用date()函数时，format参数字符串'u'总是会返回000000）
 		if (strpos($this->_date_fmt, 'u') !== FALSE)
 		{
 			$microtime_full = microtime(TRUE);
@@ -255,14 +258,17 @@ class CI_Log {
 
 	/**
 	 * Format the log line.
+     * 格式化日志行
 	 *
 	 * This is for extensibility of log formatting
 	 * If you want to change the log format, extend the CI_Log class and override this method
+     * 该函数实现日志格式的可扩展性
+     * 如果你想要改变日志格式，需继承 CI_Log 类并重写此方法。
 	 *
-	 * @param	string	$level 	The error level
-	 * @param	string	$date 	Formatted date string
-	 * @param	string	$message 	The log message
-	 * @return	string	Formatted log line with a new line character '\n' at the end
+	 * @param	string	$level 	The error level     错误等级
+	 * @param	string	$date 	Formatted date string   日期格式字符串
+	 * @param	string	$message 	The log message     日志信息
+	 * @return	string	Formatted log line with a new line character '\n' at the end    在结尾添加了换行符'\n'的格式化日志行
 	 */
 	protected function _format_line($level, $date, $message)
 	{
@@ -273,6 +279,7 @@ class CI_Log {
 
 	/**
 	 * Byte-safe strlen()
+     * 字节安全的 strlen()
 	 *
 	 * @param	string	$str
 	 * @return	int
@@ -288,6 +295,7 @@ class CI_Log {
 
 	/**
 	 * Byte-safe substr()
+     * 字节安全的 substr()
 	 *
 	 * @param	string	$str
 	 * @param	int	$start
@@ -300,6 +308,7 @@ class CI_Log {
 		{
 			// mb_substr($str, $start, null, '8bit') returns an empty
 			// string on PHP 5.3
+            // 在 PHP 5.3版本，mb_substr($str, $start, null, '8bit') 返回一个空的字符串。
 			isset($length) OR $length = ($start >= 0 ? self::strlen($str) - $start : -$start);
 			return mb_substr($str, $start, $length, '8bit');
 		}
