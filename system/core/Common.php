@@ -601,7 +601,7 @@ if ( ! function_exists('_error_handler'))
 			set_status_header(500);
 		}
 
-        // 我们应该忽略错误吗？我们将获取当前的 error_reporting 等级，
+        // 获取当前的 error_reporting 等级，并判断是否应该忽略错误
         // 并将它和传入的 $severity 做按位与运算来得到结果。
 		if (($severity & error_reporting()) !== $severity)
 		{
