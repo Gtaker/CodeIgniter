@@ -4,6 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /*
 |--------------------------------------------------------------------------
 | Base Site URL
+| 基础URL
 |--------------------------------------------------------------------------
 |
 | URL to your CodeIgniter root. Typically this will be your base URL,
@@ -22,17 +23,35 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | If you need to allow multiple domains, remember that this file is still
 | a PHP script and you can easily do that on your own.
 |
+| 链接到你的 CodeIgniter 根目录。通常这是一个带有尾部斜杠的基本链接：
+|
+|	http://example.com/
+|
+| 警告：你必须设置这个值！
+|
+| 如果没有设置，CodeIgniter将会尝试猜测协议和安装路径，
+| 但是出于对安全的考虑，主机名将会设置 $_SERVER['SERVER_ADDR']（如果可用） 或 localhost。
+| 自动检测机制的存在只是为了方便开发，一定不能用于生产环境！
+|
+| 如果你需要使用多个域名，请记住该文件的本质是一个 PHP 脚本，
+| 你可以很轻易的用你自己的方法来达到目的。
+|
 */
 $config['base_url'] = '';
 
 /*
 |--------------------------------------------------------------------------
 | Index File
+| 引导文件（前端控制器）
 |--------------------------------------------------------------------------
 |
 | Typically this will be your index.php file, unless you've renamed it to
 | something else. If you are using mod_rewrite to remove the page set this
 | variable so that it is blank.
+|
+| 通常这将会是你的 index.php 文件，除非你将其重命名为其他的名字。
+| 如果你使用了 mod_rewrite (重写模块) 删除了该变量指定的页面，
+| 那么它将会是空值。
 |
 */
 $config['index_page'] = 'index.php';
@@ -40,6 +59,7 @@ $config['index_page'] = 'index.php';
 /*
 |--------------------------------------------------------------------------
 | URI PROTOCOL
+| URI 协议
 |--------------------------------------------------------------------------
 |
 | This item determines which server global should be used to retrieve the
@@ -51,6 +71,17 @@ $config['index_page'] = 'index.php';
 | 'PATH_INFO'      Uses $_SERVER['PATH_INFO']
 |
 | WARNING: If you set this to 'PATH_INFO', URIs will always be URL-decoded!
+|
+| 该选项决定了使用哪个全局服务器变量来取得URI字符串。
+| 默认设置 'REQUEST_URI' 适用于大多数服务器。
+| 如果你的链接不奏效，那么试一试其他美味的佐料（注：...原文：try one of the other delicious flavors）：
+|
+| 'REQUEST_URI'    Uses $_SERVER['REQUEST_URI']
+| 'QUERY_STRING'   Uses $_SERVER['QUERY_STRING']
+| 'PATH_INFO'      Uses $_SERVER['PATH_INFO']
+|
+| 警告：如果该项设置为 'PATH_INFO',所有的 URI 都会被 URL 解码！
+|
 */
 $config['uri_protocol']	= 'REQUEST_URI';
 
