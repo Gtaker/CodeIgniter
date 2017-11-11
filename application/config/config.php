@@ -179,40 +179,61 @@ $config['subclass_prefix'] = 'MY_';
 | Enabling this setting will tell CodeIgniter to look for a Composer
 | package auto-loader script in application/vendor/autoload.php.
 |
+| 设置该选项将会告诉 CodeIgniter，在 application/vendor/autoload.php
+| 中，寻找（使用） Composer 自动加载脚本。
+|
 |	$config['composer_autoload'] = TRUE;
 |
 | Or if you have your vendor/ directory located somewhere else, you
 | can opt to set a specific path as well:
 |
+| 或者你的 vendor/ 目录位于其他地方，你也可以设置一个具体的路径：
+|
 |	$config['composer_autoload'] = '/path/to/vendor/autoload.php';
 |
 | For more information about Composer, please visit http://getcomposer.org/
 |
+| 更多关于 Composer 的信息，请访问 http://getcomposer.org/
+|
 | Note: This will NOT disable or override the CodeIgniter-specific
 |	autoloading (application/config/autoload.php)
 |
-| 
+| 提示：这不会禁用或重写 CodeIgniter 特定的自动加载（application/config/autoload.php）
+|
 */
 $config['composer_autoload'] = FALSE;
 
 /*
 |--------------------------------------------------------------------------
 | Allowed URL Characters
+| 允许的URL字符
 |--------------------------------------------------------------------------
 |
 | This lets you specify which characters are permitted within your URLs.
 | When someone tries to submit a URL with disallowed characters they will
 | get a warning message.
 |
+| 这允许你指定 URL 里可以存在的特殊字符。
+| 当某人尝试访问一个含有不允许使用字符的 URL，将会显示一个错误信息。
+|
 | As a security measure you are STRONGLY encouraged to restrict URLs to
 | as few characters as possible.  By default only these are allowed: a-z 0-9~%.:_-
 |
+| 作为一项安全措施，强烈建议你将 URL 限制为尽可能少的字符。
+| 默认只允许这些字符： a-z 0-9~%.:_-
+|
 | Leave blank to allow all characters -- but only if you are insane.
+|
+| 将其留空以允许所有的字符——除非你疯了。
 |
 | The configured value is actually a regular expression character group
 | and it will be executed as: ! preg_match('/^[<permitted_uri_chars>]+$/i
 |
+| 配置的值实际上是一个正则表达式字符组，它将被执行为：! preg_match('/^[<permitted_uri_chars>]+$/i
+|
 | DO NOT CHANGE THIS UNLESS YOU FULLY UNDERSTAND THE REPERCUSSIONS!!
+|
+| 除非你已完全了解改动会造成的后果，否则不要改变该选项的值！！
 |
 */
 $config['permitted_uri_chars'] = 'a-z 0-9~%.:_\-';
@@ -220,23 +241,38 @@ $config['permitted_uri_chars'] = 'a-z 0-9~%.:_\-';
 /*
 |--------------------------------------------------------------------------
 | Enable Query Strings
+| 启用查询字符串
 |--------------------------------------------------------------------------
 |
 | By default CodeIgniter uses search-engine friendly segment based URLs:
 | example.com/who/what/where/
 |
+| 默认的，CodeIgniter 使用对搜索引擎友好的基于'段'的 URL：
+| example.com/who/what/where/
+|
 | You can optionally enable standard query string based URLs:
 | example.com?who=me&what=something&where=here
 |
+| 你可以启用允许基于标准查询字符串的URL：
+| example.com?who=me&what=something&where=here
+|
 | Options are: TRUE or FALSE (boolean)
+|
+| 设置为：TRUE 或 FALSE（布尔值）
 |
 | The other items let you set the query string 'words' that will
 | invoke your controllers and its functions:
 | example.com/index.php?c=controller&m=function
 |
+| 其他选项允许你设置查询字符串'单词'，来调用你的控制器及其方法:
+| example.com/index.php?c=controller&m=function
+|
 | Please note that some of the helpers won't work as expected when
 | this feature is enabled, since CodeIgniter is designed primarily to
 | use segment based URLs.
+|
+| 请注意，启用该特性后，一些辅助函数将无法按预期工作，
+| 因为 CodeIgniter 被设计为主要使用基于段的 URL。
 |
 */
 $config['enable_query_strings'] = FALSE;
@@ -247,13 +283,19 @@ $config['directory_trigger'] = 'd';
 /*
 |--------------------------------------------------------------------------
 | Allow $_GET array
+| 允许 $_GET 数组
 |--------------------------------------------------------------------------
 |
 | By default CodeIgniter enables access to the $_GET array.  If for some
 | reason you would like to disable it, set 'allow_get_array' to FALSE.
 |
+| 默认的，CodeIgniter 允许使用 $_GET 数组。
+| 如果出于某些原因你或许想要禁用它，设置 'allow_get_array' 选项为 FALSE。
+|
 | WARNING: This feature is DEPRECATED and currently available only
 |          for backwards compatibility purposes!
+|
+| 警告：该特性已被弃用，目前仅用于向后兼容的目的。
 |
 */
 $config['allow_get_array'] = TRUE;
@@ -261,34 +303,45 @@ $config['allow_get_array'] = TRUE;
 /*
 |--------------------------------------------------------------------------
 | Error Logging Threshold
+| 错误日志阈值
 |--------------------------------------------------------------------------
 |
 | You can enable error logging by setting a threshold over zero. The
 | threshold determines what gets logged. Threshold options are:
 |
-|	0 = Disables logging, Error logging TURNED OFF
-|	1 = Error Messages (including PHP errors)
-|	2 = Debug Messages
-|	3 = Informational Messages
-|	4 = All Messages
+| 你可以通过设置一个大于0的阈值来启用错误日志。
+| 阈值决定了能获取到什么样的日志。阈值选项为：
+|
+|	0 = Disables logging, Error logging TURNED OFF      禁用日志记录，关闭错误日志记录
+|	1 = Error Messages (including PHP errors)           错误信息（包括 PHP 错误）
+|	2 = Debug Messages                                  调试信息
+|	3 = Informational Messages                          一般信息（注：Informational Messages）
+|	4 = All Messages                                    所有信息
 |
 | You can also pass an array with threshold levels to show individual error types
+| 你同样也可以通过一个包含阈值的数组来显示特殊的错误类型
 |
 | 	array(2) = Debug Messages, without Error Messages
 |
 | For a live site you'll usually only enable Errors (1) to be logged otherwise
 | your log files will fill up very fast.
+| 对于一个线上的网站，你通常仅会使用 Error(1) 等级的日志记录，
+| 否则你的日志文件将会很快地被填满。
 |
 */
-$config['log_threshold'] = 0;
+$config['log_threshold'] = 4;
 
 /*
 |--------------------------------------------------------------------------
 | Error Logging Directory Path
+| 错误日志目录路径
 |--------------------------------------------------------------------------
 |
 | Leave this BLANK unless you would like to set something other than the default
 | application/logs/ directory. Use a full server path with trailing slash.
+|
+| 将该项留空，除非你想使用默认的 application/logs/ 目录以外的路径。
+| 使用结尾带斜线的完整服务器路径。
 |
 */
 $config['log_path'] = '';
@@ -296,36 +349,49 @@ $config['log_path'] = '';
 /*
 |--------------------------------------------------------------------------
 | Log File Extension
+| 日志文件扩展名
 |--------------------------------------------------------------------------
 |
 | The default filename extension for log files. The default 'php' allows for
 | protecting the log files via basic scripting, when they are to be stored
 | under a publicly accessible directory.
 |
+| 默认的日志文件扩展名。当日志文件储存在可公开访问的目录下时，
+| 默认的扩展名'php'允许通过基础脚本来保护它们。
+|
 | Note: Leaving it blank will default to 'php'.
+| 提示：将该项留空将使用默认值'php'。
 |
 */
-$config['log_file_extension'] = '';
+$config['log_file_extension'] = 'txt';
 
 /*
 |--------------------------------------------------------------------------
 | Log File Permissions
+| 日志文件权限
 |--------------------------------------------------------------------------
 |
 | The file system permissions to be applied on newly created log files.
+| 文件系统权限将被用于创建新的日志文件。
 |
 | IMPORTANT: This MUST be an integer (no quotes) and you MUST use octal
 |            integer notation (i.e. 0700, 0644, etc.)
+| 重要：该选项的值必须是一个整数（没有引号），
+|       并且必须使用八进制整数表示法（即 0700，0644，等）
 */
 $config['log_file_permissions'] = 0644;
 
 /*
 |--------------------------------------------------------------------------
 | Date Format for Logs
+| 日志的日期格式
 |--------------------------------------------------------------------------
 |
 | Each item that is logged has an associated date. You can use PHP date
 | codes to set your own date formatting
+|
+| 每一个被记录的日志都会有一个关联的日期。
+| 你可以使用 PHP 日期代码来设置你自己的日期格式。
 |
 */
 $config['log_date_format'] = 'Y-m-d H:i:s';
@@ -333,10 +399,14 @@ $config['log_date_format'] = 'Y-m-d H:i:s';
 /*
 |--------------------------------------------------------------------------
 | Error Views Directory Path
+| 错误页面的目录路径
 |--------------------------------------------------------------------------
 |
 | Leave this BLANK unless you would like to set something other than the default
 | application/views/errors/ directory.  Use a full server path with trailing slash.
+|
+| 该选项留空，除非你想要设置默认的 application/views/errors/ 目录以外的路径。
+| 使用结尾带斜线的完整服务器路径。
 |
 */
 $config['error_views_path'] = '';
@@ -344,10 +414,14 @@ $config['error_views_path'] = '';
 /*
 |--------------------------------------------------------------------------
 | Cache Directory Path
+| 缓存目录路径
 |--------------------------------------------------------------------------
 |
 | Leave this BLANK unless you would like to set something other than the default
 | application/cache/ directory.  Use a full server path with trailing slash.
+|
+| 该选项留空，除非你想要设置默认的 application/cache/ 目录以外的路径。
+| 使用结尾带斜线的完整服务器路径。
 |
 */
 $config['cache_path'] = '';
@@ -355,10 +429,12 @@ $config['cache_path'] = '';
 /*
 |--------------------------------------------------------------------------
 | Cache Include Query String
+| 缓存查询字符串
 |--------------------------------------------------------------------------
 |
 | Whether to take the URL query string into consideration when generating
 | output cache files. Valid options are:
+| 当缓存输出文件时，是否考虑 URL 查询字符串。有效的设置为：
 |
 |	FALSE      = Disabled
 |	TRUE       = Enabled, take all query parameters into account.
@@ -367,16 +443,26 @@ $config['cache_path'] = '';
 |	array('q') = Enabled, but only take into account the specified list
 |	             of query parameters.
 |
+|	FALSE      = 禁止
+|   TRUE       = 允许，将所有的查询参数考虑在内。
+|                请注意，该选项可能会导致为同一页面重复生成大量的缓存文件。
+|
+|	array('q') = 允许，但是只会将列表中指定的查询参数考虑在内。
+|
 */
 $config['cache_query_string'] = FALSE;
 
 /*
 |--------------------------------------------------------------------------
 | Encryption Key
+| 加密密钥
 |--------------------------------------------------------------------------
 |
 | If you use the Encryption class, you must set an encryption key.
 | See the user guide for more info.
+|
+| 如果你是用了加密类（Encryption class），你必须设置一个加密密钥。
+| 产看用户手册来获取更多信息。
 |
 | https://codeigniter.com/user_guide/libraries/encryption.html
 |
