@@ -472,52 +472,71 @@ $config['encryption_key'] = '';
 /*
 |--------------------------------------------------------------------------
 | Session Variables
+| 会话（Session）变量
 |--------------------------------------------------------------------------
 |
 | 'sess_driver'
 |
 |	The storage driver to use: files, database, redis, memcached
+|   使用的驱动程序：files, database, redis, memcached
 |
 | 'sess_cookie_name'
 |
 |	The session cookie name, must contain only [0-9a-z_-] characters
+|   会话的 Cookie 名，必须只包含数字、字母、减号和下划线（[0-9a-z_-]）。
 |
 | 'sess_expiration'
 |
 |	The number of SECONDS you want the session to last.
 |	Setting to 0 (zero) means expire when the browser is closed.
+|   Session 持续的秒数。
+|   设置为0时，会在浏览器关闭时失效。
 |
 | 'sess_save_path'
 |
 |	The location to save sessions to, driver dependent.
+|   储存 Session 的位置，依赖于驱动程序。
 |
 |	For the 'files' driver, it's a path to a writable directory.
 |	WARNING: Only absolute paths are supported!
+|   对于 'files' 驱动，意味着一个可写的目录路径。
+|   警告：只支持绝对路径！
 |
 |	For the 'database' driver, it's a table name.
 |	Please read up the manual for the format with other session drivers.
+|   对于'database'驱动，意味着一个表名。
+|   对于其他的 Session 驱动类型的格式，请悦动用户手册。
 |
 |	IMPORTANT: You are REQUIRED to set a valid save path!
+|   重要：你需要设置一个有效的保存路径！
 |
 | 'sess_match_ip'
 |
 |	Whether to match the user's IP address when reading the session data.
+|   读取 Session 信息的时候，是否匹配用户的 IP 地址。
 |
 |	WARNING: If you're using the database driver, don't forget to update
 |	         your session table's PRIMARY KEY when changing this setting.
+|   警告：如果你使用的是数据库驱动，更改此设置的时，
+|         不要忘记更新 Session 表的主键（PRIMARY KEY）。
 |
 | 'sess_time_to_update'
 |
 |	How many seconds between CI regenerating the session ID.
+|   CI 重新生成 Session ID的时间。
 |
 | 'sess_regenerate_destroy'
 |
 |	Whether to destroy session data associated with the old session ID
 |	when auto-regenerating the session ID. When set to FALSE, the data
 |	will be later deleted by the garbage collector.
+|   当自动重新生成新 Session ID 时，是否销毁与旧 Session ID 关联的 Session 数据。
+|   当设置为 FALSE 时，数据将在一段时间后被垃圾回收。
 |
 | Other session cookie settings are shared with the rest of the application,
 | except for 'cookie_prefix' and 'cookie_httponly', which are ignored here.
+| 除 'cookie_prefix' 和 'cookie_httponly' 外，
+| 其他的 Session cookie 设置与应用程序的其它部分共享。
 |
 */
 $config['sess_driver'] = 'files';
@@ -531,16 +550,19 @@ $config['sess_regenerate_destroy'] = FALSE;
 /*
 |--------------------------------------------------------------------------
 | Cookie Related Variables
+| Cookie 相关变量
 |--------------------------------------------------------------------------
 |
-| 'cookie_prefix'   = Set a cookie name prefix if you need to avoid collisions
-| 'cookie_domain'   = Set to .your-domain.com for site-wide cookies
-| 'cookie_path'     = Typically will be a forward slash
-| 'cookie_secure'   = Cookie will only be set if a secure HTTPS connection exists.
-| 'cookie_httponly' = Cookie will only be accessible via HTTP(S) (no javascript)
+| 'cookie_prefix'   = Set a cookie name prefix if you need to avoid collisions      设置一个 Cookie 名前缀，如果你需要避免（Cookie 名）冲突的话。
+| 'cookie_domain'   = Set to .your-domain.com for site-wide cookies                 设置 Cookie 的有效域名，如：.你的域名.com（.your-domain.com）。
+| 'cookie_path'     = Typically will be a forward slash                             通常是一个正斜线。
+| 'cookie_secure'   = Cookie will only be set if a secure HTTPS connection exists.  只有在通过 HTTPS 链接时，才会生成 Cookie。
+| 'cookie_httponly' = Cookie will only be accessible via HTTP(S) (no javascript)    只可以通过 HTTP(S) 读取 Cookie（禁止 javascript 读取）。
 |
 | Note: These settings (with the exception of 'cookie_prefix' and
 |       'cookie_httponly') will also affect sessions.
+| 提示：这些设置（除 'cookie_prefix' 和 'cookie_httponly'外）
+|       同样会影响到 Session。
 |
 */
 $config['cookie_prefix']	= '';
@@ -552,13 +574,17 @@ $config['cookie_httponly'] 	= FALSE;
 /*
 |--------------------------------------------------------------------------
 | Standardize newlines
+| 标准化换行符
 |--------------------------------------------------------------------------
 |
 | Determines whether to standardize newline characters in input data,
 | meaning to replace \r\n, \r, \n occurrences with the PHP_EOL value.
+| 设置是否标准化输入数据中的换行符，
+| 也就是将 \r\n，\r，\n ，替换为 PHP_EOL 的值。
 |
 | WARNING: This feature is DEPRECATED and currently available only
 |          for backwards compatibility purposes!
+| 警告：该特性已被弃用，当前仅用于向后兼容
 |
 */
 $config['standardize_newlines'] = FALSE;
@@ -566,13 +592,16 @@ $config['standardize_newlines'] = FALSE;
 /*
 |--------------------------------------------------------------------------
 | Global XSS Filtering
+| XSS 全局过滤
 |--------------------------------------------------------------------------
 |
 | Determines whether the XSS filter is always active when GET, POST or
 | COOKIE data is encountered
+| 设置在使用 GET、POST、COOKIE 数据时，是否总是进行 XSS 过滤。
 |
 | WARNING: This feature is DEPRECATED and currently available only
 |          for backwards compatibility purposes!
+| 警告：该特性已被弃用，当前仅用于向后兼容。
 |
 */
 $config['global_xss_filtering'] = FALSE;
@@ -580,16 +609,20 @@ $config['global_xss_filtering'] = FALSE;
 /*
 |--------------------------------------------------------------------------
 | Cross Site Request Forgery
+| 伪造跨站点请求
 |--------------------------------------------------------------------------
 | Enables a CSRF cookie token to be set. When set to TRUE, token will be
 | checked on a submitted form. If you are accepting user data, it is strongly
 | recommended CSRF protection be enabled.
+| 设置并启用 CSRF（跨站点请求伪造） Cookie 令牌。
+| 当设置为 TRUE 时，将会检查令牌来源。
+| 如果你接受用户数据，强烈推荐开启 CSRF 保护。
 |
-| 'csrf_token_name' = The token name
-| 'csrf_cookie_name' = The cookie name
-| 'csrf_expire' = The number in seconds the token should expire.
-| 'csrf_regenerate' = Regenerate token on every submission
-| 'csrf_exclude_uris' = Array of URIs which ignore CSRF checks
+| 'csrf_token_name' = The token name    令牌名
+| 'csrf_cookie_name' = The cookie name  Cookie名
+| 'csrf_expire' = The number in seconds the token should expire.    令牌的过期秒数。
+| 'csrf_regenerate' = Regenerate token on every submission          每次请求后重置令牌。
+| 'csrf_exclude_uris' = Array of URIs which ignore CSRF checks      忽略 CSRF 检查的 URI 数组。
 */
 $config['csrf_protection'] = FALSE;
 $config['csrf_token_name'] = 'csrf_test_name';
@@ -601,21 +634,32 @@ $config['csrf_exclude_uris'] = array();
 /*
 |--------------------------------------------------------------------------
 | Output Compression
+| 压缩输出
 |--------------------------------------------------------------------------
 |
 | Enables Gzip output compression for faster page loads.  When enabled,
 | the output class will test whether your server supports Gzip.
 | Even if it does, however, not all browsers support compression
 | so enable only if you are reasonably sure your visitors can handle it.
+| 使用 Gzip 压缩输出以获得更快的页面加载速度。
+| 当使用该功能时，不论你的服务器是否支持，输出类都会尝试使用 Gzip。
+| 但是，即使这么做，并不是所有的浏览器都支持使用压缩，
+| 所以，只应在你确信你的访问者可以处理它的时候启用该选项。
 |
 | Only used if zlib.output_compression is turned off in your php.ini.
 | Please do not use it together with httpd-level output compression.
+| 只有在 php.ini 文件中的 zlib.output_compression 选项关闭时，才能使用该功能。
+| 请不要和 httpd-level 输出压缩同时使用。
 |
 | VERY IMPORTANT:  If you are getting a blank page when compression is enabled it
 | means you are prematurely outputting something to your browser. It could
 | even be a line of whitespace at the end of one of your scripts.  For
 | compression to work, nothing can be sent before the output buffer is called
 | by the output class.  Do not 'echo' any values with compression enabled.
+| 非常重要：如果启用压缩后获得的是一个空白的页面，
+| 则意味着你过早地将某些内容输出到了浏览器中。或许只是你脚本末尾的一个空行。
+| 执行压缩时，在输出缓冲区被输出类调用前，不能发送任何任何东西。
+| 当启用压缩时，不要使用 'echo' 输出任何值。
 |
 */
 $config['compress_output'] = FALSE;
@@ -623,12 +667,17 @@ $config['compress_output'] = FALSE;
 /*
 |--------------------------------------------------------------------------
 | Master Time Reference
+| 主时间参考
 |--------------------------------------------------------------------------
 |
 | Options are 'local' or any PHP supported timezone. This preference tells
 | the system whether to use your server's local time as the master 'now'
 | reference, or convert it to the configured one timezone. See the 'date
 | helper' page of the user guide for information regarding date handling.
+| 设置为 'local' 或任何 PHP 支持的时区。
+| 该选项优先告诉系统是否使用服务器的本地的时间来做为当前时间的引用。
+| 或者将其改变为一个配置的时区。
+| 查看用户手册的 'date helper' 页面来获取关于日期操作的信息。
 |
 */
 $config['time_reference'] = 'local';
@@ -636,13 +685,17 @@ $config['time_reference'] = 'local';
 /*
 |--------------------------------------------------------------------------
 | Rewrite PHP Short Tags
+| 重写 PHP 短标记
 |--------------------------------------------------------------------------
 |
 | If your PHP installation does not have short tag support enabled CI
 | can rewrite the tags on-the-fly, enabling you to utilize that syntax
 | in your view files.  Options are TRUE or FALSE (boolean)
+| 如果你的 PHP 安装的时候没有允许使用短标记，CI可以在运行中重写标记。
+| 允许你在视图文件中使用这种语法。设置为 TRUE 或 FALSE（布尔值）
 |
 | Note: You need to have eval() enabled for this to work.
+| 提示：使用该功能需要允许使用 eval() 函数。
 |
 */
 $config['rewrite_short_tags'] = FALSE;
@@ -650,6 +703,7 @@ $config['rewrite_short_tags'] = FALSE;
 /*
 |--------------------------------------------------------------------------
 | Reverse Proxy IPs
+| 反向 IP 代理
 |--------------------------------------------------------------------------
 |
 | If your server is behind a reverse proxy, you must whitelist the proxy
@@ -657,10 +711,16 @@ $config['rewrite_short_tags'] = FALSE;
 | HTTP_X_FORWARDED_FOR and HTTP_CLIENT_IP in order to properly identify
 | the visitor's IP address.
 |
+| 如果你的服务器支持反向代理，那么你必须将代理 IP 地址写入白名单，
+| 其中 CodeIgniter 应当信任 HTTP_X_FORWARDED_FOR 和 HTTP_CLIENT_IP 等 HTTP 头，
+| 以正确地识别访问者的 IP 地址。
+|
 | You can use both an array or a comma-separated list of proxy addresses,
 | as well as specifying whole subnets. Here are a few examples:
+| 你可以使用数组或以逗号分隔的列表来表示代理地址，
+| 并指定子网掩码。以下为一个简单的例子：
 |
-| Comma-separated:	'10.0.1.200,192.168.5.0/24'
-| Array:		array('10.0.1.200', '192.168.5.0/24')
+| Comma-separated:	'10.0.1.200,192.168.5.0/24'             逗号分隔：
+| Array:		array('10.0.1.200', '192.168.5.0/24')       数组：
 */
 $config['proxy_ips'] = '';
