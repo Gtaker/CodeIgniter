@@ -2,7 +2,9 @@
 /**
  * CodeIgniter
  *
- * An open source application development framework for PHP
+ * 一款开源的PHP应用开发框架
+ *
+ * （注：以下为 MIT协议声明 原文）
  *
  * This content is released under the MIT License (MIT)
  *
@@ -39,8 +41,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
  * URI Class
+ * URI 类
  *
  * Parses URIs and determines routing
+ * 解析 URI 并确定路由
  *
  * @package		CodeIgniter
  * @subpackage	Libraries
@@ -52,6 +56,7 @@ class CI_URI {
 
 	/**
 	 * List of cached URI segments
+     * 缓存的 URI 段列表
 	 *
 	 * @var	array
 	 */
@@ -59,6 +64,7 @@ class CI_URI {
 
 	/**
 	 * Current URI string
+     * 当前 URI 字符串
 	 *
 	 * @var	string
 	 */
@@ -66,8 +72,10 @@ class CI_URI {
 
 	/**
 	 * List of URI segments
+     * URI 段列表
 	 *
 	 * Starts at 1 instead of 0.
+     * 从 1 开始，而不是 0。
 	 *
 	 * @var	array
 	 */
@@ -75,8 +83,10 @@ class CI_URI {
 
 	/**
 	 * List of routed URI segments
+     * 路由后的 URI 段列表
 	 *
 	 * Starts at 1 instead of 0.
+     * 从 1 开始，而不是 0。
 	 *
 	 * @var	array
 	 */
@@ -84,8 +94,10 @@ class CI_URI {
 
 	/**
 	 * Permitted URI chars
+     * 合法的 URI 字符
 	 *
 	 * PCRE character group allowed in URI segments
+     * 在 URI 段中允许使用 PCRE 字符组
 	 *
 	 * @var	string
 	 */
@@ -93,6 +105,7 @@ class CI_URI {
 
 	/**
 	 * Class constructor
+     * 类构造函数
 	 *
 	 * @return	void
 	 */
@@ -101,12 +114,15 @@ class CI_URI {
 		$this->config =& load_class('Config', 'core');
 
 		// If query strings are enabled, we don't need to parse any segments.
+        // 如果查询字符串被启用，我们不需要解析任何段。
 		// However, they don't make sense under CLI.
+        // 然而，他们在 CLI 模式下不起作用，
 		if (is_cli() OR $this->config->item('enable_query_strings') !== TRUE)
 		{
 			$this->_permitted_uri_chars = $this->config->item('permitted_uri_chars');
 
 			// If it's a CLI request, ignore the configuration
+            // 如果是一个 CLI 请求，那么忽略配置项
 			if (is_cli())
 			{
 				$uri = $this->_parse_argv();
@@ -118,7 +134,7 @@ class CI_URI {
 
 				switch ($protocol)
 				{
-					case 'AUTO': // For BC purposes only
+					case 'AUTO': // For BC purposes only    只是为了 BC 的目的（注：不确定这里指的是不是 BC 数学函数）
 					case 'REQUEST_URI':
 						$uri = $this->_parse_request_uri();
 						break;
