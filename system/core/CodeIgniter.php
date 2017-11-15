@@ -352,7 +352,6 @@ if ( ! is_php('5.4'))
  * ------------------------------------------------------
  *
  */
-	// Load the base controller class
     // 载入基础控制器类
 	require_once BASEPATH.'core/Controller.php';
 
