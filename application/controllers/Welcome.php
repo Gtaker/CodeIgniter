@@ -6,7 +6,7 @@ class Welcome extends CI_Controller {
 	/**
      * 该控制器的引导页。
 	 *
-     * 影射到以下 URL 地址
+     * 映射到以下 URL 地址
 	 * 		http://example.com/index.php/welcome
 	 *	- 或 -
 	 * 		http://example.com/index.php/welcome/index
@@ -19,6 +19,7 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
+	    echo $_SERVER['QUERY_STRING'];
 		$this->load->view('welcome_message');
 	}
 }
