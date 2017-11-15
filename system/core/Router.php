@@ -2,7 +2,9 @@
 /**
  * CodeIgniter
  *
- * An open source application development framework for PHP
+ * 一款开源的PHP应用开发框架
+ *
+ * （注：以下为 MIT协议声明 原文）
  *
  * This content is released under the MIT License (MIT)
  *
@@ -39,8 +41,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
  * Router Class
+ * 路由类
  *
  * Parses URIs and determines routing
+ * 解析 URI 并确定路由
  *
  * @package		CodeIgniter
  * @subpackage	Libraries
@@ -52,6 +56,7 @@ class CI_Router {
 
 	/**
 	 * CI_Config class object
+     * CI_Config 类对象
 	 *
 	 * @var	object
 	 */
@@ -59,6 +64,7 @@ class CI_Router {
 
 	/**
 	 * List of routes
+     * 路由表
 	 *
 	 * @var	array
 	 */
@@ -66,6 +72,7 @@ class CI_Router {
 
 	/**
 	 * Current class name
+     * 当前类名
 	 *
 	 * @var	string
 	 */
@@ -73,6 +80,7 @@ class CI_Router {
 
 	/**
 	 * Current method name
+     * 当前方法名
 	 *
 	 * @var	string
 	 */
@@ -80,6 +88,7 @@ class CI_Router {
 
 	/**
 	 * Sub-directory that contains the requested controller class
+     * 包含请求的控制器类的子目录
 	 *
 	 * @var	string
 	 */
@@ -87,6 +96,7 @@ class CI_Router {
 
 	/**
 	 * Default controller (and method if specific)
+     * 默认控制器（和方法，如果是具体的话）
 	 *
 	 * @var	string
 	 */
@@ -94,9 +104,11 @@ class CI_Router {
 
 	/**
 	 * Translate URI dashes
+     * 翻译 URI 的破折号
 	 *
 	 * Determines whether dashes in controller & method segments
 	 * should be automatically replaced by underscores.
+     * 确定是否将控制器和方法段中的破折号（-）自动替换为下划线（_）
 	 *
 	 * @var	bool
 	 */
@@ -104,8 +116,10 @@ class CI_Router {
 
 	/**
 	 * Enable query strings flag
+     * 允许查询字符串的标记
 	 *
 	 * Determines whether to use GET parameters or segment URIs
+     * 确定使用 GET 参数还是 URI 段
 	 *
 	 * @var	bool
 	 */
@@ -115,8 +129,10 @@ class CI_Router {
 
 	/**
 	 * Class constructor
+     * 类构造函数
 	 *
 	 * Runs the route mapping function.
+     * 启动路由映射函数
 	 *
 	 * @param	array	$routing
 	 * @return	void
