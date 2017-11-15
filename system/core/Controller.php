@@ -56,7 +56,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class CI_Controller {
 
 	/**
-	 * Reference to the CI singleton
      * 引用 CI 单例
 	 *
 	 * @var	object
@@ -73,9 +72,6 @@ class CI_Controller {
 	{
 		self::$instance =& $this;
 
-		// Assign all the class objects that were instantiated by the
-		// bootstrap file (CodeIgniter.php) to local class variables
-		// so that CI can run as one big super object.
         // 分配所有被引导文件（CodeIgniter.php）实例化的类对象到当前类的变量中，
         // 所以 CI 就可以以一个巨大的超类对象的方式运行。
 		foreach (is_loaded() as $var => $class)
@@ -91,7 +87,6 @@ class CI_Controller {
 	// --------------------------------------------------------------------
 
 	/**
-	 * Get the CI singleton
      * 获取 CI 单例
 	 *
 	 * @static
