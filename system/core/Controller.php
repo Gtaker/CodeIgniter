@@ -42,8 +42,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * 应用控制器类
  *
- * This class object is the super class that every library in
- * CodeIgniter will be assigned to.
  * CodeIgniter 中每个库都会分配给这个超类对象。
  *
  * @package		CodeIgniter
