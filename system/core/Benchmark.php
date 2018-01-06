@@ -40,11 +40,8 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * Benchmark Class
  * 基准类
  *
- * This class enables you to mark points and calculate the time difference
- * between them. Memory consumption can also be displayed.
  * 这个类允许你标记时间点并计算差值，并且可以显示内存消耗。
  *
  * @package		CodeIgniter
@@ -56,7 +53,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class CI_Benchmark {
 
 	/**
-	 * List of all benchmark markers
      * 列出所有基准标记列表
 	 *
 	 * @var	array
@@ -64,11 +60,8 @@ class CI_Benchmark {
 	public $marker = array();
 
 	/**
-	 * Set a benchmark marker
      * 设置一个基准标记
 	 *
-	 * Multiple calls to this function can be made so that several
-	 * execution points can be timed.
      * 多次调用该方法，即可设置多个标记的时间点。
      *
 	 *
@@ -83,26 +76,20 @@ class CI_Benchmark {
 	// --------------------------------------------------------------------
 
 	/**
-	 * Elapsed time
      * 经过的时间
 	 *
-	 * Calculates the time difference between two marked points.
      * 计算两个标记之间的时间差。
 	 *
-	 * If the first parameter is empty this function instead returns the
-	 * {elapsed_time} pseudo-variable. This permits the full system
-	 * execution time to be shown in a template. The output class will
-	 * swap the real value for this variable.
      * 如果第一个参数为空，该方法会返回一个 {elapsed_time} 伪变量，
      * 这允许在模版中显示完整的系统执行时间，输出类会将该变量渲染为实际值。
 	 *
-	 * @param	string	$point1		A particular marked point   一个特定的标记点
-	 * @param	string	$point2		A particular marked point   一个特定的标记点
-	 * @param	int	$decimals	Number of decimal places        小数点的位数
+	 * @param	string	$point1		一个特定的标记点
+	 * @param	string	$point2		一个特定的标记点
+	 * @param	int	$decimals	小数点的位数
 	 *
-	 * @return	string	Calculated elapsed time on success,     成功计算出过去的时间，
-	 *			an '{elapsed_string}' if $point1 is empty       如果 $point1 为空，则返回 '{elapsed_string}',
-	 *			or an empty string if $point1 is not found.     如果 $point1 没有找到，则返回空字符串。
+	 * @return	string	成功计算出过去的时间，
+	 *			如果 $point1 为空，则返回 '{elapsed_string}',
+	 *			如果 $point1 没有找到，则返回空字符串。
 	 */
 	public function elapsed_time($point1 = '', $point2 = '', $decimals = 4)
 	{
@@ -127,15 +114,10 @@ class CI_Benchmark {
 	// --------------------------------------------------------------------
 
 	/**
-	 * Memory Usage
      * 内存使用
 	 *
-	 * Simply returns the {memory_usage} marker.
      * 简单的返回一个 {memory_usage} 标记
 	 *
-	 * This permits it to be put it anywhere in a template
-	 * without the memory being calculated until the end.
-	 * The output class will swap the real value for this variable.
      * 这允许在模版的任何地方调用，而不需要在最后计算内存。
      * 输出类将会将该变量渲染为实际值。
 	 *
