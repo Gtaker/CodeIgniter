@@ -40,7 +40,6 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * Application Controller Class
  * 应用控制器类
  *
  * This class object is the super class that every library in
