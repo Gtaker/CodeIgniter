@@ -63,7 +63,6 @@ class CI_Controller {
 	private static $instance;
 
 	/**
-	 * Class constructor
      * 类构造函数
 	 *
 	 * @return	void
