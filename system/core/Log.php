@@ -2,7 +2,9 @@
 /**
  * CodeIgniter
  *
- * An open source application development framework for PHP
+ * 一款开源的PHP应用开发框架
+ *
+ * （注：以下为 MIT协议声明 原文）
  *
  * This content is released under the MIT License (MIT)
  *
@@ -38,7 +40,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * Logging Class
+ * 日志类
  *
  * @package		CodeIgniter
  * @subpackage	Libraries
@@ -49,64 +51,68 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class CI_Log {
 
 	/**
-	 * Path to save log files
+     * 日志文件的保存路径
 	 *
 	 * @var string
 	 */
 	protected $_log_path;
 
 	/**
-	 * File permissions
+     * 文件权限
 	 *
 	 * @var	int
 	 */
 	protected $_file_permissions = 0644;
 
 	/**
-	 * Level of logging
+     * 日志记录等级（阈值）
 	 *
 	 * @var int
 	 */
 	protected $_threshold = 1;
 
 	/**
-	 * Array of threshold levels to log
+     * 日志（记录等级）阈值数组
+     *
+     * （注：这里翻译成阈值其实不太恰当，
+     * 因为当 config.php 中 $config['log_threshold'] 的值为一个数组，
+     * 则只会记录指定等级的错误，如：[1,4]表示只允许记录 ERROR 和 ALL 等级的错误。）
 	 *
 	 * @var array
 	 */
 	protected $_threshold_array = array();
 
 	/**
-	 * Format of timestamp for log files
+     * 日志文件的时间戳格式
 	 *
 	 * @var string
 	 */
 	protected $_date_fmt = 'Y-m-d H:i:s';
 
 	/**
-	 * Filename extension
+     * 文件扩展名
 	 *
 	 * @var	string
 	 */
 	protected $_file_ext;
 
 	/**
-	 * Whether or not the logger can write to the log files
+     * 日志记录器是否可以写入日志文件
 	 *
 	 * @var bool
 	 */
 	protected $_enabled = TRUE;
 
 	/**
-	 * Predefined logging levels
+     * 预定义日志记录等级
 	 *
 	 * @var array
 	 */
 	protected $_levels = array('ERROR' => 1, 'DEBUG' => 2, 'INFO' => 3, 'ALL' => 4);
 
 	/**
-	 * mbstring.func_overload flag
-	 *
+     * mbstring.func_overload（注：php.ini 中的配置项） 标记
+     *
 	 * @var	bool
 	 */
 	protected static $func_overload;
@@ -114,7 +120,7 @@ class CI_Log {
 	// --------------------------------------------------------------------
 
 	/**
-	 * Class constructor
+     * 类构造函数
 	 *
 	 * @return	void
 	 */
@@ -159,12 +165,12 @@ class CI_Log {
 	// --------------------------------------------------------------------
 
 	/**
-	 * Write Log File
+     * 写入日志文件
 	 *
-	 * Generally this function will be called using the global log_message() function
-	 *
-	 * @param	string	$level 	The error level: 'error', 'debug' or 'info'
-	 * @param	string	$msg 	The error message
+	 * 这个函数通常被公共函数 log_message() 调用
+     *
+	 * @param	string	$level 	错误等级：'error', 'debug' or 'info'
+	 * @param	string	$msg 	错误信息
 	 * @return	bool
 	 */
 	public function write_log($level, $msg)
@@ -188,7 +194,7 @@ class CI_Log {
 		if ( ! file_exists($filepath))
 		{
 			$newfile = TRUE;
-			// Only add protection to php files
+            // 只对php文件添加保护
 			if ($this->_file_ext === 'php')
 			{
 				$message .= "<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>\n\n";
@@ -202,7 +208,8 @@ class CI_Log {
 
 		flock($fp, LOCK_EX);
 
-		// Instantiating DateTime with microseconds appended to initial date is needed for proper support of this format
+        // 实例化一个 DateTime 类以支持正确的带微秒格式的日期
+        //（注：当使用date()函数时，format参数字符串'u'总是会返回000000）
 		if (strpos($this->_date_fmt, 'u') !== FALSE)
 		{
 			$microtime_full = microtime(TRUE);
@@ -239,15 +246,15 @@ class CI_Log {
 	// --------------------------------------------------------------------
 
 	/**
-	 * Format the log line.
+     * 格式化日志行
 	 *
-	 * This is for extensibility of log formatting
-	 * If you want to change the log format, extend the CI_Log class and override this method
+     * 该函数实现日志格式的可扩展性
+     * 如果你想要改变日志格式，需继承 CI_Log 类并重写此方法。
 	 *
-	 * @param	string	$level 	The error level
-	 * @param	string	$date 	Formatted date string
-	 * @param	string	$message 	The log message
-	 * @return	string	Formatted log line with a new line character '\n' at the end
+	 * @param	string	$level 	错误等级
+	 * @param	string	$date 	日期格式字符串
+	 * @param	string	$message 	日志信息
+	 * @return	string	在结尾添加了换行符'\n'的格式化日志行
 	 */
 	protected function _format_line($level, $date, $message)
 	{
@@ -257,7 +264,7 @@ class CI_Log {
 	// --------------------------------------------------------------------
 
 	/**
-	 * Byte-safe strlen()
+     * 字节安全的 strlen()
 	 *
 	 * @param	string	$str
 	 * @return	int
@@ -272,7 +279,7 @@ class CI_Log {
 	// --------------------------------------------------------------------
 
 	/**
-	 * Byte-safe substr()
+     * 字节安全的 substr()
 	 *
 	 * @param	string	$str
 	 * @param	int	$start
@@ -283,8 +290,7 @@ class CI_Log {
 	{
 		if (self::$func_overload)
 		{
-			// mb_substr($str, $start, null, '8bit') returns an empty
-			// string on PHP 5.3
+            // 在 PHP 5.3版本，mb_substr($str, $start, null, '8bit') 返回一个空的字符串。
 			isset($length) OR $length = ($start >= 0 ? self::strlen($str) - $start : -$start);
 			return mb_substr($str, $start, $length, '8bit');
 		}

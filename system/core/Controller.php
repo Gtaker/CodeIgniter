@@ -2,7 +2,9 @@
 /**
  * CodeIgniter
  *
- * An open source application development framework for PHP
+ * 一款开源的PHP应用开发框架
+ *
+ * （注：以下为 MIT协议声明 原文）
  *
  * This content is released under the MIT License (MIT)
  *
@@ -38,10 +40,9 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * Application Controller Class
+ * 应用控制器类
  *
- * This class object is the super class that every library in
- * CodeIgniter will be assigned to.
+ * CodeIgniter 中每个库都会分配给这个超类对象。
  *
  * @package		CodeIgniter
  * @subpackage	Libraries
@@ -52,14 +53,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class CI_Controller {
 
 	/**
-	 * Reference to the CI singleton
+     * 引用 CI 单例
 	 *
 	 * @var	object
 	 */
 	private static $instance;
 
 	/**
-	 * Class constructor
+     * 类构造函数
 	 *
 	 * @return	void
 	 */
@@ -67,9 +68,8 @@ class CI_Controller {
 	{
 		self::$instance =& $this;
 
-		// Assign all the class objects that were instantiated by the
-		// bootstrap file (CodeIgniter.php) to local class variables
-		// so that CI can run as one big super object.
+        // 分配所有被引导文件（CodeIgniter.php）实例化的类对象到当前类的变量中，
+        // 所以 CI 就可以以一个巨大的超类对象的方式运行。
 		foreach (is_loaded() as $var => $class)
 		{
 			$this->$var =& load_class($class);
@@ -83,7 +83,7 @@ class CI_Controller {
 	// --------------------------------------------------------------------
 
 	/**
-	 * Get the CI singleton
+     * 获取 CI 单例
 	 *
 	 * @static
 	 * @return	object

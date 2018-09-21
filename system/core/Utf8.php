@@ -2,7 +2,9 @@
 /**
  * CodeIgniter
  *
- * An open source application development framework for PHP
+ * 一款开源的PHP应用开发框架
+ *
+ * （注：以下为 MIT协议声明 原文）
  *
  * This content is released under the MIT License (MIT)
  *
@@ -38,9 +40,9 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * Utf8 Class
+ * Utf8 类
  *
- * Provides support for UTF-8 environments
+ * 提供对 UTF-8 环境的支持
  *
  * @package		CodeIgniter
  * @subpackage	Libraries
@@ -51,18 +53,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class CI_Utf8 {
 
 	/**
-	 * Class constructor
+     * 构造函数
 	 *
-	 * Determines if UTF-8 support is to be enabled.
+     * 确定是否启用 UTF-8 支持
 	 *
 	 * @return	void
 	 */
 	public function __construct()
 	{
 		if (
-			defined('PREG_BAD_UTF8_ERROR')				// PCRE must support UTF-8
-			&& (ICONV_ENABLED === TRUE OR MB_ENABLED === TRUE)	// iconv or mbstring must be installed
-			&& strtoupper(config_item('charset')) === 'UTF-8'	// Application charset must be UTF-8
+			defined('PREG_BAD_UTF8_ERROR')				// PCRE 必须支持 UTF-8
+			&& (ICONV_ENABLED === TRUE OR MB_ENABLED === TRUE)	// 必须安装 iconv 或 mbstring 扩展
+			&& strtoupper(config_item('charset')) === 'UTF-8'	// 应用字符集必须是 UTF-8
 			)
 		{
 			define('UTF8_ENABLED', TRUE);
@@ -80,11 +82,11 @@ class CI_Utf8 {
 	// --------------------------------------------------------------------
 
 	/**
-	 * Clean UTF-8 strings
+     * 清理 UTF-8 字符串
 	 *
-	 * Ensures strings contain only valid UTF-8 characters.
+     * 确保字符串只包含有效的 UTF-8 字符。
 	 *
-	 * @param	string	$str	String to clean
+	 * @param	string	$str	要清理的字符串
 	 * @return	string
 	 */
 	public function clean_string($str)
@@ -107,13 +109,12 @@ class CI_Utf8 {
 	// --------------------------------------------------------------------
 
 	/**
-	 * Remove ASCII control characters
+     * 删除 ASCII 控制字符
 	 *
-	 * Removes all ASCII control characters except horizontal tabs,
-	 * line feeds, and carriage returns, as all others can cause
-	 * problems in XML.
-	 *
-	 * @param	string	$str	String to clean
+	 * 删除水平制表符、换行符和回车符之外的所有的 ASCII 控制字符，
+     * 因为所有其他字符在 XML 中都可能会引发问题。
+     *
+	 * @param	string	$str	需要清理的字符串
 	 * @return	string
 	 */
 	public function safe_ascii_for_xml($str)
@@ -124,13 +125,13 @@ class CI_Utf8 {
 	// --------------------------------------------------------------------
 
 	/**
-	 * Convert to UTF-8
+     * 转换到 UTF-8
 	 *
-	 * Attempts to convert a string to UTF-8.
+     * 尝试将一个字符串转换为 UTF-8
 	 *
-	 * @param	string	$str		Input string
-	 * @param	string	$encoding	Input encoding
-	 * @return	string	$str encoded in UTF-8 or FALSE on failure
+	 * @param	string	$str		输入字符串
+	 * @param	string	$encoding	输入编码
+	 * @return	string	$str        UTF-8 编码的字符串或在失败时返回 FALSE
 	 */
 	public function convert_to_utf8($str, $encoding)
 	{
@@ -149,11 +150,11 @@ class CI_Utf8 {
 	// --------------------------------------------------------------------
 
 	/**
-	 * Is ASCII?
+     * 是否是 ASCII 码？
 	 *
-	 * Tests if a string is standard 7-bit ASCII or not.
+     * 测试字符串是否是标准的7位 ASCII 码。
 	 *
-	 * @param	string	$str	String to check
+	 * @param	string	$str	要检测的字符串
 	 * @return	bool
 	 */
 	public function is_ascii($str)
